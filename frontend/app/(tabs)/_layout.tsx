@@ -1,43 +1,31 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+    <Tabs screenOptions={{ tabBarShowLabel: false, headerShown: false, tabBarStyle: { height: 70, borderTopLeftRadius: 20, borderTopRightRadius: 20 } }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name="home-outline" size={24} color={focused ? '#3B82F6' : '#9CA3AF'} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="bills"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="cash-multiple" size={24} color={focused ? '#3B82F6' : '#9CA3AF'} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="goals"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="target" size={24} color={focused ? '#3B82F6' : '#9CA3AF'} />
+          ),
         }}
       />
     </Tabs>
