@@ -70,6 +70,7 @@ export default function Goals() {
     fetchGoals();
   }, []);
 
+  // If the data is still loading, show a loading indicator
   if (loading) {
     return (
       <View style={styles.centered}>
