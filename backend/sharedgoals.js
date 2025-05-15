@@ -1,3 +1,11 @@
+const express = require('express'); //web framework for Node.js
+const cors = require('cors'); //for frontend and backend communication
+const PORT = 5050; //http://localhost:5050
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 let goals = [];
 
 app.get('/api/goals', (req, res) => {
@@ -56,3 +64,9 @@ app.patch('/api/goals/:id/contribute/:name', (req, res) => {
     updatedSplitDetails: goal.splitDetails
   });
 });
+
+//testing purposes
+app.listen(PORT, () => {
+    console.log(`✅ Backend running on http://localhost:${PORT}`);
+});
+
