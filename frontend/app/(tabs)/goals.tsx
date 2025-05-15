@@ -9,10 +9,10 @@ import {
   Alert,
 } from 'react-native';
 
-// This is the base URL for the API. Make sure to replace it with your actual server URL.
-const BASE_URL = 'http://10.0.0.28:5050';
+//your local IP
+const BASE_URL = 'http://10.0.0.28:1010';
 
-// This type represents a person who is part of the goal's split details.
+//person who is part of the goal's split details.
 type SplitPerson = {
   name: string;
   owesTo: string;
@@ -20,7 +20,7 @@ type SplitPerson = {
   contributed: number;
 };
 
-// This type represents a goal's details.
+//represents a goal's details.
 type Goal = {
   id: number;
   description: string;

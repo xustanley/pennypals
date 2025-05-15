@@ -1,6 +1,6 @@
 const express = require('express'); //web framework for Node.js
 const cors = require('cors'); //for frontend and backend communication
-const PORT = 5050; //http://localhost:5050
+const PORT = 1010; //http://localhost:1010
 
 const app = express();
 app.use(cors());
