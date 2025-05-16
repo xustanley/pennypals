@@ -77,6 +77,7 @@ export default function Goals() {
     };
 
     //patch request to contribute to a goal
+    //takes in a contribution amount, adds it to the goal
     const contribute = async (goalId: string, name: string, amount: Number) => {
         try {
             const response = await fetch(`${BASE_URL}/api/goals/${goalId}/contribute/${name}`, {
