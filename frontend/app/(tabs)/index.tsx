@@ -1,35 +1,51 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
-const recentActivity = [
-  {
-    id: '1',
-    title: 'Apartment Rent',
-    date: 'May 2',
-    amount: '$750.00',
-    note: 'Split with 3 people',
-    icon: <Ionicons name="home-outline" size={24} color="#EF4444" />,
-  },
-  {
-    id: '2',
-    title: 'Groceries',
-    date: 'May 1',
-    amount: '$64.32',
-    note: 'Split with Sam',
-    icon: <MaterialIcons name="shopping-cart" size={24} color="#10B981" />,
-  },
-  {
-    id: '3',
-    title: 'Netflix',
-    date: 'Apr 28',
-    amount: '$14.99',
-    note: 'Subscription',
-    icon: <FontAwesome5 name="film" size={20} color="#6366F1" />,
-  },
-];
-
 export default function Home() {
+  const [activity, setActivity] = useState<any[]>([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchActivity = async () => {
+    try {
+      const goalsResponse = await fetch('http://10.0.0.28:1010/api/goals'); //your local IP
+      const goals = await goalsResponse.json();
+
+      const expensesResponse = await fetch('http://10.0.0.28:5050/api/expenses');
+      const expenses = await expensesResponse.json();
+
+      const goalActivity = goals.map((goal: any) => ({
+        id: goal.id,
+        title: goal.description,
+        note: 'Goal',
+        date: new Date(goal.createdAt).toLocaleDateString(),
+        amount: `$${goal.amount}`,
+        icon: <MaterialIcons name="star" size={24} color="#FFD700" />,
+      }));
+
+      const expenseActivity = expenses.map((expense: any) => ({
+        id: expense.id,
+        title: expense.title,
+        note: 'Expense',
+        date: new Date(expense.createdAt).toLocaleDateString(),
+        amount: `$${expense.amount}`,
+        icon: <FontAwesome5 name="money-bill-wave" size={24} color="#28A745" />,
+      }));
+      const combinedActivity = [...goalActivity, ...expenseActivity].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      const sorted = combinedActivity.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      setActivity(sorted);
+    } catch (error) {
+      console.error('Error fetching activity:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchActivity();
+}
+, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.greeting}>Hello, Alex!</Text>
@@ -57,7 +73,7 @@ export default function Home() {
 
       <Text style={styles.sectionTitle}>Recent Activity</Text>
       <FlatList
-        data={recentActivity}
+        data={activity}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.activityItem}>

@@ -89,3 +89,10 @@ app.patch('/api/expenses/:id/pay/:name', (req, res) => {
 app.listen(PORT, () => {
     console.log(`✅ Unified backend running at http://localhost:${PORT}`);
 });
+
+//testing purposes
+app.delete('/api/expenses', (req, res) => {
+  expenses = [];
+  res.send({ message: 'All expenses deleted' });
+});
+

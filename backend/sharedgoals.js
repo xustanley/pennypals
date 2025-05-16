@@ -70,3 +70,8 @@ app.listen(PORT, () => {
     console.log(`✅ Backend running on http://localhost:${PORT}`);
 });
 
+
+app.delete('/api/goals', (req, res) => {
+  goals = [];
+  res.send({ message: 'All goals deleted' });
+});

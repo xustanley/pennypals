@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 //your local IP
-const BASE_URL = 'http://192.168.5.80:1010';
+const BASE_URL = 'http://10.0.0.28:1010';
 //friends list
 const friends = ['Alex', 'Sam', 'Jordan', 'Taylor', 'Jamie'];
 //temporarily store current user in here - dynamically added later w/ login flow
