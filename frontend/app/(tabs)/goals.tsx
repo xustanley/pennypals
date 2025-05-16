@@ -158,12 +158,27 @@ export default function Goals() {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }: {item : Goal}) => {
                     const totalContributed = item.splitDetails.reduce((sum, p) => sum + p.contributed, 0);
+                    const isComplete = totalContributed >= item.amount;
                     return (
-                        <View style={styles.goalCard}>
+                        <View style={[styles.goalCard, isComplete && styles.goalCardComplete]}>
+                            <Text style={styles.subtext}>Created by: {item.createdBy}</Text>
                             <Text style={styles.description}>{item.description}</Text>
                             <Text style={styles.amount}>Goal: ${item.amount?.toFixed(2)}</Text>
                             <Text style={styles.amount}>Saved: ${totalContributed.toFixed(2)}</Text>
-                            <Text style={styles.subtext}>Created by: {item.createdBy}</Text>
+                            <View style={styles.progressBarContainer}>
+                              <View
+                                style={[
+                                  styles.progressBarFill,
+                                  {
+                                    width: `${Math.min((totalContributed / item.amount) * 100, 100)}%`,
+                                  },
+                                ]}
+                              />
+                            </View>
+
+                            {isComplete && (
+                              <Text style={styles.completeText}>✅ COMPLETE!</Text>
+                            )}
                             {item.splitDetails.map((person) => (
                               <View key={`${item.id}-${person.name}`} style={styles.personRow}>
                                 <Text>
@@ -386,5 +401,31 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 8,
     },
+    progressBarContainer: {
+      height: 10,
+      width: '100%',
+      backgroundColor: '#E5E7EB',
+      borderRadius: 5,
+      marginTop: 6,
+      overflow: 'hidden',
+    },
+    progressBarFill: {
+      height: '100%',
+      backgroundColor: '#7D5FFF',
+      borderRadius: 5,
+    },
+    goalCardComplete: {
+  borderColor: '#22C55E',
+  borderWidth: 2,
+  backgroundColor: '#ECFDF5',
+  },
+  completeText: {
+    marginTop: 8,
+    fontWeight: 'bold',
+    color: '#16A34A',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+
 });
 
