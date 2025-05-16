@@ -5,46 +5,46 @@ import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 export default function Home() {
   const [activity, setActivity] = useState<any[]>([]);
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchActivity = async () => {
-    try {
-      const goalsResponse = await fetch('http://10.0.0.28:1010/api/goals'); //your local IP
-      const goals = await goalsResponse.json();
+  useEffect(() => {
+    const fetchActivity = async () => {
+      try {
+        const goalsResponse = await fetch('http://10.0.0.28:1010/api/goals'); //your local IP
+        const goals = await goalsResponse.json();
 
-      const expensesResponse = await fetch('http://10.0.0.28:5050/api/expenses');
-      const expenses = await expensesResponse.json();
+        const expensesResponse = await fetch('http://10.0.0.28:5050/api/expenses');
+        const expenses = await expensesResponse.json();
 
-      const goalActivity = goals.map((goal: any) => ({
-        id: goal.id,
-        title: goal.description,
-        note: 'Goal',
-        date: new Date(goal.createdAt).toLocaleDateString(),
-        amount: `$${goal.amount}`,
-        icon: <MaterialIcons name="star" size={24} color="#FFD700" />,
-      }));
+        const goalActivity = goals.map((goal: any) => ({
+          id: goal.id,
+          title: goal.description,
+          note: 'Goal',
+          date: new Date(goal.createdAt).toLocaleDateString(),
+          amount: `$${goal.amount}`,
+          icon: <MaterialIcons name="star" size={24} color="#FFD700" />,
+        }));
 
-      const expenseActivity = expenses.map((expense: any) => ({
-        id: expense.id,
-        title: expense.title,
-        note: 'Expense',
-        date: new Date(expense.createdAt).toLocaleDateString(),
-        amount: `$${expense.amount}`,
-        icon: <FontAwesome5 name="money-bill-wave" size={24} color="#28A745" />,
-      }));
-      const combinedActivity = [...goalActivity, ...expenseActivity].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      const sorted = combinedActivity.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      setActivity(sorted);
-    } catch (error) {
-      console.error('Error fetching activity:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchActivity();
-}
-, []);
+        const expenseActivity = expenses.map((expense: any) => ({
+          id: expense.id,
+          title: expense.title,
+          note: 'Expense',
+          date: new Date(expense.createdAt).toLocaleDateString(),
+          amount: `$${expense.amount}`,
+          icon: <FontAwesome5 name="money-bill-wave" size={24} color="#28A745" />,
+        }));
+        const combinedActivity = [...goalActivity, ...expenseActivity].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        const sorted = combinedActivity.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        setActivity(sorted);
+      } catch (error) {
+        console.error('Error fetching activity:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchActivity();
+  }
+    , []);
 
   return (
     <View style={styles.container}>
