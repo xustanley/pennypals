@@ -4,7 +4,7 @@
     "slug": "pennypals",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/circlelogo.png",
     "scheme": "pennypals",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,25 +13,24 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/circlelogo.png",
+        "backgroundColor": "#215245"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/circlelogo.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "image": "./assets/images/circlelogo.png",
+          "resizeMode": "cover",
+          "backgroundColor": "#215245"
         }
       ]
     ],
