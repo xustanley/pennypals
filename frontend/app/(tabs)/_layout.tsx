@@ -13,7 +13,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="bills"
+        name="shared"
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons name="cash-multiple" size={24} color={focused ? '#3B82F6' : '#9CA3AF'} />
@@ -28,14 +28,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-       name="subscriptions"
-       options={{
-         tabBarIcon: ({ focused }) => (
-           <MaterialCommunityIcons name="cloud" size={24} color={focused ? '#3B82F6' : '#9CA3AF'} />
-         ),
-       }}
-       />
     </Tabs>
   );
 }
