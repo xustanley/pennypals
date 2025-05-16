@@ -15,6 +15,7 @@ import {
 const BASE_URL = 'http://192.168.5.80:1010';
 //friends list
 const friends = ['Alex', 'Sam', 'Jordan', 'Taylor', 'Jamie'];
+//temporarily store current user in here - dynamically added later w/ login flow
 const currentUser = 'Alex';
 
 //person who is part of the goal's split details.
@@ -193,7 +194,7 @@ export default function Goals() {
                                     }
                                     style={styles.contributeButton}
                                   >
-                                    <Text style={styles.payButtonText}>Contribute</Text>
+                                    <Text style={styles.payButtonText}>+</Text>
                                   </TouchableOpacity>
                                 )}
                               </View>
