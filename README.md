@@ -1,5 +1,7 @@
 # PennyPals
 
+*submitted Capital One Tech Summit "Fintech Future" Hackathon
+
 **Transforming Group Banking**  
 _Your Group. Your Goals. Your Growth._
 
